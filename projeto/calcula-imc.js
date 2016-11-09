@@ -38,21 +38,43 @@ function montaPaciente(pacienteTr){
         return paciente;
 }
 
-var trsPacientes = document.getElementsByClassName('paciente');//array de trs
 
-percorreArray(trsPacientes, function ImprimeEModificaTdDeIMC(pacienteTr){
+var botao = document.getElementById("calcula-imcs");
+botao.addEventListener("click", function calculaTodosIMCs(){
 
+    var trsPacientes = document.getElementsByClassName('paciente');//array de trs
 
-    var paciente = montaPaciente(pacienteTr);
-
-    var tdImc = pacienteTr.getElementsByClassName('info-imc')[0];
-
-    var imc = paciente.pegaIMC();
-    tdImc.textContent = imc;
+    percorreArray(trsPacientes, function ImprimeEModificaTdDeIMC(pacienteTr){
 
 
-    console.log(imc);
+        var paciente = montaPaciente(pacienteTr);
 
+        var tdImc = pacienteTr.getElementsByClassName('info-imc')[0];
+
+        var imc = paciente.pegaIMC();
+        tdImc.textContent = imc;
+
+
+        console.log(imc);
+
+    });
 });
 
-var botao = document.getElementsById("calcula-imcs");
+// botao.onclick = calculaTodosIMCs(); // permite que crie apenas uma funcionalidade para o click do botão. Caso tenha mais de uma, executará a última
+
+//permite mais de uma função ser executada ao mesmo tempo ao click do botão
+// botao.addEventListener("click", function(){
+//     console.log("pipino");
+// });
+
+// botao.addEventListener("click", function(){
+//     console.log("Outro pipino");
+// });
+
+var trs = document.getElementsByTagName("tr");
+
+percorreArray(trs, function(trAtual){
+    trAtual.addEventListener("mouseover", function(){
+        this.setAttribute("bgcolor", "grey");
+    });
+});
